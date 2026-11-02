@@ -110,10 +110,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          WEBMAIL_TAG=$(gh release view --repo bulwarkmail/webmail --json tagName -q .tagName)
+          WEBMAIL_TAG=$(gh release view --repo paulhenry46/webmail --json tagName -q .tagName)
           WEBMAIL_VERSION="${WEBMAIL_TAG#v}"
           echo "Downloading Bulwark Webmail $WEBMAIL_TAG..."
-          curl -L "https://github.com/bulwarkmail/webmail/releases/download/${WEBMAIL_TAG}/bulwark-standalone-${WEBMAIL_VERSION}-linux-amd64.tar.gz" -o webmail.tar.gz
+          curl -L "https://github.com/paulhenry46/webmail/releases/download/${WEBMAIL_TAG}/bulwark-standalone-${WEBMAIL_VERSION}-linux-amd64.tar.gz" -o webmail.tar.gz
           tar -xzf webmail.tar.gz -C internal/assets/assets/apps/webmail --strip-components=1
           rm webmail.tar.gz
 
