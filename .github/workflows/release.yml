@@ -113,7 +113,7 @@ jobs:
           WEBMAIL_TAG=$(gh release view --repo AurionMail/bulwarkmail --json tagName -q .tagName)
           WEBMAIL_VERSION="${WEBMAIL_TAG#v}"
           echo "Downloading Bulwark Webmail $WEBMAIL_TAG..."
-          curl -L "https://github.com/AurionMail/bulwarkmail/releases/download/${WEBMAIL_TAG}/bulwark-standalone-${WEBMAIL_VERSION}-linux-amd64.tar.gz" -o webmail.tar.gz
+          curl -L "https://github.com/paulhenry46/webmail/releases/download/${WEBMAIL_TAG}/bulwark-standalone-${WEBMAIL_VERSION}-linux-amd64.tar.gz" -o webmail.tar.gz
           tar -xzf webmail.tar.gz -C internal/assets/assets/apps/webmail --strip-components=1
           rm webmail.tar.gz
 
@@ -137,34 +137,3 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release upload ${{ github.event.release.tag_name }} aurion-orchestrator-linux-amd64.zip --clobber
-
-      # ------------------------------------------------------------------------
-      # 6. BUILD & PUSH DOCKER IMAGE TO GHCR
-      # ------------------------------------------------------------------------
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/${{ github.repository }}
-          tags: |
-            type=semver,pattern={{version}}
-            type=raw,value=latest
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
