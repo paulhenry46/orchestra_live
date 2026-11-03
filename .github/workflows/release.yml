@@ -120,9 +120,9 @@ jobs:
           tar -xzf webmail.tar.gz -C temp_webmail
 
           echo "Contenu de temp_webmail :"
-          ls -la temp_webmail/
+          ls -la temp_webmail/bulwark-standalone/
           echo "Contenu de .next :"
-          ls -la temp_webmail/.next/
+          ls -la temp_webmail/bulwark-standalone/.next/
           if [ -d "temp_webmail/bulwark-standalone" ]; then
             echo "Contenu de temp_webmail/bulwark-standalone :"
             ls -la temp_webmail/bulwark-standalone/
