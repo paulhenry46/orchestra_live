@@ -113,9 +113,17 @@ jobs:
           WEBMAIL_TAG=$(gh release view --repo bulwarkmail/webmail --json tagName -q .tagName)
           WEBMAIL_VERSION="${WEBMAIL_TAG#v}"
           echo "Downloading Bulwark Webmail $WEBMAIL_TAG..."
+          
+          mkdir -p temp_webmail internal/assets/assets/apps/webmail
+          
           curl -L "https://github.com/bulwarkmail/webmail/releases/download/${WEBMAIL_TAG}/bulwark-standalone-${WEBMAIL_VERSION}-linux-amd64.tar.gz" -o webmail.tar.gz
-          tar -xzf webmail.tar.gz -C internal/assets/assets/apps/webmail --strip-components=1
-          rm webmail.tar.gz
+          tar -xzf webmail.tar.gz -C temp_webmail
+          
+          if [ -d "temp_webmail/bulwark-standalone" ]; then
+            cp -r temp_webmail/bulwark-standalone/* internal/assets/assets/apps/webmail/
+          fi
+          
+          rm -rf webmail.tar.gz temp_webmail
 
       # ------------------------------------------------------------------------
       # 5. COMPILE ORCHESTRATOR EXECUTABLE AND UPLOAD TO RELEASE
