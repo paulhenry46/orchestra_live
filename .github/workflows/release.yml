@@ -129,6 +129,8 @@ jobs:
           if [ -d "temp_webmail/bulwark-standalone" ]; then
             cp -r temp_webmail/bulwark-standalone/* internal/assets/assets/apps/webmail/
           fi
+          echo "Contenu  copié de temp_webmail :"
+          ls -la internal/assets/assets/apps/webmail/
           
           rm -rf webmail.tar.gz temp_webmail
 
