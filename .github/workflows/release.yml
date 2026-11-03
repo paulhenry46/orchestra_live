@@ -116,27 +116,7 @@ jobs:
           
           mkdir -p temp_webmail internal/assets/assets/apps/webmail
           
-          curl -L "https://github.com/bulwarkmail/webmail/releases/download/${WEBMAIL_TAG}/bulwark-standalone-${WEBMAIL_VERSION}-linux-amd64.tar.gz" -o webmail.tar.gz
-          tar -xzf webmail.tar.gz -C temp_webmail
-
-          echo "Contenu de temp_webmail :"
-          ls -la temp_webmail/bulwark-standalone/
-          echo "Contenu de .next :"
-          ls -la temp_webmail/bulwark-standalone/.next/
-          if [ -d "temp_webmail/bulwark-standalone" ]; then
-            echo "Contenu de temp_webmail/bulwark-standalone :"
-            ls -la temp_webmail/bulwark-standalone/
-          fi
-          
-          if [ -d "temp_webmail/bulwark-standalone" ]; then
-            cp -a temp_webmail/bulwark-standalone/. internal/assets/assets/apps/webmail/
-          fi
-          echo "Contenu  copié de temp_webmail :"
-          ls -la internal/assets/assets/apps/webmail/
-          echo "Contenu  copié de temp_webmail/.next :"
-          ls -la internal/assets/assets/apps/webmail/.next/
-          
-          rm -rf webmail.tar.gz temp_webmail
+          curl -L "https://github.com/bulwarkmail/webmail/releases/download/${WEBMAIL_TAG}/bulwark-standalone-${WEBMAIL_VERSION}-linux-amd64.tar.gz" -o internal/assets/assets/apps/webmail.tar.gz
 
       # ------------------------------------------------------------------------
       # 5. COMPILE ORCHESTRATOR EXECUTABLE AND UPLOAD TO RELEASE
