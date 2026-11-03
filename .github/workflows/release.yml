@@ -118,6 +118,13 @@ jobs:
           
           curl -L "https://github.com/bulwarkmail/webmail/releases/download/${WEBMAIL_TAG}/bulwark-standalone-${WEBMAIL_VERSION}-linux-amd64.tar.gz" -o webmail.tar.gz
           tar -xzf webmail.tar.gz -C temp_webmail
+
+          echo "Contenu de temp_webmail :"
+          ls -la temp_webmail/
+          if [ -d "temp_webmail/bulwark-standalone" ]; then
+            echo "Contenu de temp_webmail/bulwark-standalone :"
+            ls -la temp_webmail/bulwark-standalone/
+          fi
           
           if [ -d "temp_webmail/bulwark-standalone" ]; then
             cp -r temp_webmail/bulwark-standalone/* internal/assets/assets/apps/webmail/
