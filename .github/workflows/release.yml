@@ -98,13 +98,13 @@ jobs:
           unzip -q sso.zip -d internal/assets/assets/apps/sso
           rm sso.zip
 
-      - name: Download CryptPad Bundle (from AurionMail/docs release)
+      - name: Download CryptPad Bundle (from AurionMail/docs_live release)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          DOCS_TAG=$(gh release view --repo AurionMail/docs --json tagName -q .tagName)
-          echo "Downloading CryptPad from AurionMail/docs tag $DOCS_TAG..."
-          curl -L "https://github.com/AurionMail/docs/releases/download/${DOCS_TAG}/cryptpad.zip" -o internal/assets/assets/apps/cryptpad.zip
+          DOCS_TAG=$(gh release view --repo AurionMail/docs_live --json tagName -q .tagName)
+          echo "Downloading CryptPad from AurionMail/docs_live tag $DOCS_TAG..."
+          curl -L "https://github.com/AurionMail/docs_live/releases/download/${DOCS_TAG}/cryptpad.zip" -o internal/assets/assets/apps/cryptpad.zip
 
       - name: Download Webmail Standalone (from AurionMail/bulwarkmail release)
         env:
